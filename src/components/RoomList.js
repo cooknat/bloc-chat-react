@@ -1,13 +1,15 @@
-
 import React from 'react';
+import firebase from '../firebase';
+
 
 class RoomList extends React.Component {
 
 	constructor(props){
 			super(props);			
-			this.roomsRef = this.props.firebase.database().ref('rooms');
+			this.roomsRef = firebase.database().ref('rooms');
 			this.createRoom = this.createRoom.bind(this);
 			this.addRoom = this.addRoom.bind(this);
+			this.setActiveRoom = this.setActiveRoom.bind(this);
 			this.state = {
 				rooms: []
 			};
@@ -35,13 +37,17 @@ class RoomList extends React.Component {
      });
 	}
 
+	setActiveRoom(event){
+		this.props.activeRoom(event.target.name);
+	}
+
 	render() {
 
 		return (	
 		<div>	
-				<div className="roomList">
+				<div>
 					<ul>
-					  {(this.state.rooms).map(room => <li key={room.key}>{room.name}</li>)}				  
+					  {(this.state.rooms).map(room =><li key={room.key}><a onClick={this.setActiveRoom} name={room.name}>{room.name}</a></li>)}				  
 					</ul>
 				</div>
 				<form id="createRoom" ref={(input) => this.roomForm = input} onSubmit={(e) => this.createRoom(e)}>

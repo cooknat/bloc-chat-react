@@ -22,3 +22,25 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.container{
+  display: flex;
+  width: 100%;
+}
+
+.roomList{
+  order: 1;
+  flex: 1;
+  background-color: green;
+  flex-basis: auto;
+  padding: 1rem;
+  min-height: 600px;
+}
+
+.messageList{
+  order: 1;
+  flex: 5;
+  background-color: white;
+  padding: 1rem;
+}
+
