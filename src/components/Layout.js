@@ -3,17 +3,16 @@ import RoomList from './RoomList';
 import MessageList from './MessageList';
 
 class Layout extends React.Component {	
-
+   
   
 	render() {
-
 		return (	
 		<div className="container">	
 		  <div className="roomlist">
-		    <RoomList activeRoom={this.props.activeRoom}/>
+		    <RoomList setActiveRoom={this.props.setActiveRoom}/>		   
 		  </div>
 		  <div className="messageList">
-		    <MessageList activeRoom={this.props.activeRoom} />
+		    <MessageList getActiveRoom={this.props.getActiveRoom} />
 		  </div>  
 		</div>
 		)

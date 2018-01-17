@@ -38,7 +38,7 @@ class RoomList extends React.Component {
 	}
 
 	setActiveRoom(event){
-		this.props.activeRoom(event.target.name);
+		this.props.setActiveRoom(event.target.name);
 	}
 
 	render() {

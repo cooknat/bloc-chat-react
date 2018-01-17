@@ -6,22 +6,26 @@ class App extends React.Component {
  
 constructor(){
   super();
-  this.getActiveRoom = this.getActiveRoom.bind(this);
+  this.setActiveRoom = this.setActiveRoom.bind(this);
   this.state = {
     activeRoom: null
   };
 } 
 
-  getActiveRoom = (activeRoom) => {
+  setActiveRoom = (activeRoom) => {
      this.setState({ activeRoom: activeRoom });
   };
+
+  getActiveRoom = () => {
+    return this.state.activeRoom;
+  }
 
   render() {
     return (
      <div>       
      <p>Active room is: {this.state.activeRoom}</p>
-       <Layout activeRoom={this.getActiveRoom}/>
-     }
+       <Layout setActiveRoom={this.setActiveRoom} getActiveRoom={this.getActiveRoom}/>
+     
      </div>
     );
   }
