@@ -30,15 +30,16 @@ class RoomList extends React.Component {
 	}
 
 	addRoom(){
-		this.roomsRef.on('child_added', snapshot => {
+	   this.roomsRef.on('child_added', snapshot => {
        const room = snapshot.val();
        room.key = snapshot.key;     
        this.setState({ rooms: this.state.rooms.concat( room ) });       
      });
 	}
 
-	setActiveRoom(event){
-		this.props.setActiveRoom(event.target.name);
+	setActiveRoom(roomId, event){
+		this.props.setActiveRoom([roomId, event.target.name]);
+		
 	}
 
 	render() {
@@ -47,7 +48,7 @@ class RoomList extends React.Component {
 		<div>	
 				<div>
 					<ul>
-					  {(this.state.rooms).map(room =><li key={room.key}><a onClick={this.setActiveRoom} name={room.name}>{room.name}</a></li>)}				  
+					  {(this.state.rooms).map(room =><li key={room.key}><a onClick={(e) => this.setActiveRoom(room.key, e)} name={room.name}>{room.name}</a></li>)}				  
 					</ul>
 				</div>
 				<form id="createRoom" ref={(input) => this.roomForm = input} onSubmit={(e) => this.createRoom(e)}>

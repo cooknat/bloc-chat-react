@@ -1,22 +1,12 @@
 import React from 'react';
-import firebase from '../firebase';
+//i am a stateless functional component
+const Header = () => {		
 
-
-class Header extends React.Component {
-
-
-	
-
-	render() {
-
-		return (	
-		<div>
-			<ul>
-			 <p>Header</p>			  
-			</ul>
-		</div>
-		)
-	}
+	return (	
+	<div className="header">			
+	  <p>Welcome to this chatroom - which might get some CSS one day, if it is very lucky</p>			  
+	</div>
+	)	
 }
 
 

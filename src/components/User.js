@@ -16,8 +16,6 @@ class User extends React.Component {
   	firebase.auth().onAuthStateChanged( user => {
       this.props.setUser(user); 
      });  	
-  
-
   }
 
 

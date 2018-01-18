@@ -18,17 +18,9 @@ class MessageList extends React.Component {
 	  	if(this.state.messages.length > 0){
 	  		this.setState({ messages: [] });
 	  	}
-	  	//get room id
-	  	var curr = this.props.getActiveRoom();
-	  	var roomId = null;
-	  	this.roomsRef.orderByChild('name').equalTo(curr).once('value', snapshot => {
-	  	     	snapshot.forEach(room => {     		
-	     		roomId = room.key;
-	     	});
-	     	
-	  	});
+    	var rm = this.props.getActiveRoom();	  	
 	  	var arr = [];
-     this.messagesRef.orderByChild('roomId').equalTo(roomId).on('value', snapshot => {      	
+      this.messagesRef.orderByChild('roomId').equalTo(rm[0]).on('value', snapshot => {      	
          if(snapshot.val()){
          	 snapshot.forEach(message => {
          	 	 let temp = message.val();         	 	
@@ -38,13 +30,23 @@ class MessageList extends React.Component {
            this.setState({ messages: arr });              
          }               
      });
+   		
     }   
+   //do i need to call this from 'message' or will it be automatically caused by the message being added to firebase?
+   showNewMessage(){
+   	this.messagesRef.on('child_added', snapshot => {
+       const message = snapshot.val();
+       message.key = snapshot.key;     
+       this.setState({ messages: this.state.messages.concat( message ) });       
+     });
+   } 
+
 
 
 	render() {
 		return (	
 		<div>
-		<p>Welcome to the <b>{this.props.getActiveRoom()}</b>	</p>
+	
 			<ul>
 			 {(this.state.messages).map(message => <li key={message.key}>{message.user}: {message.content} - Sent at: {message.time}</li>)}			  
 			</ul>
@@ -56,10 +58,3 @@ class MessageList extends React.Component {
 
 export default MessageList;
 
-/*this.roomsRef.on('child_added', snapshot => {
-       const room = snapshot.val();
-       room.key = snapshot.key;     
-       this.setState({ rooms: this.state.rooms.concat( room ) });       
-     });;*/
-
-     

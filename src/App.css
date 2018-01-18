@@ -44,3 +44,18 @@
   padding: 1rem;
 }
 
+.addMessage{
+  float: right;
+  width: 70%;
+}
+
+.addMessage input{
+  width: 90%;
+}
+
+.header{
+  float: right;
+  font-weight: bold;
+  padding: 5px;
+}
+
